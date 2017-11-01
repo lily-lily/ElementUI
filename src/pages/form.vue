@@ -26,13 +26,13 @@
 			<el-form-item label="活动时间" required>
 			    <el-col :span="5">
 			      <el-form-item prop="date1">
-			        <el-date-picker type="date" :editable=false placeholder="选择开始日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+			        <el-date-picker type="date" :editable=false  placeholder="选择开始日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
 			      </el-form-item>
 			    </el-col>
 			    <el-col class="line" :span="2">-</el-col>
 			    <el-col :span="5">
 			      <el-form-item prop="date2">
-			         <el-date-picker type="date" :editable=false placeholder="选择结束日期" v-model="ruleForm.date2" style="width: 100%;" ></el-date-picker>
+			         <el-date-picker type="date" :editable=false  placeholder="选择结束日期" v-model="ruleForm.date2" style="width: 100%;" ></el-date-picker>
 			      </el-form-item>
 			    </el-col>
 			</el-form-item>
