@@ -221,6 +221,11 @@
 										</el-form-item>
 									</el-col>
 									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="费用金额（原）：" prop="Expenseamounty">
+										    <el-input v-model="Expenseamounty" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
 										<el-form-item label="币种：" prop="Currency">
 										    <el-input v-model="item.Currency" :readonly="true">
 										    	<el-button slot="append" icon="search" ></el-button>
@@ -228,13 +233,8 @@
 										</el-form-item>
 									</el-col>
 									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
-										<el-form-item label="费用金额（原）：" prop="Expenseamounty">
-										    <el-input v-model="item.Expenseamounty" ></el-input>
-										</el-form-item>
-									</el-col>
-									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
 										<el-form-item label="汇率：" prop="Exchangerate">
-										    <el-input v-model="item.Exchangerate"></el-input>
+										    <el-input v-model="Exchangerate"></el-input>
 										</el-form-item>
 									</el-col>
 									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
@@ -284,171 +284,168 @@
 					FormNoRule : "$JW$#yyyy##mm##dd#*(1)4(Year)*",
 					VersionCode : "V4"
 				},
-				Exchangerate:'',
-				Expenseamounty:'',
-				AdjustmentAmount:'',
-				TZHamount:''
-/*				crfyFormData:{
-	"FormTemplate":{
-		"ID" : "138a026c-f4b7-431c-901d-03107c4cac4b",
-		"TemplateCode" : "BXDFY",
-		"Name" : "日常费用报销单",
-		"TypeID" : "41bdbb1d-5f7f-409a-9ec4-37d870d2cff4",
-		"FormNoRule" : "$JW$#yyyy##mm##dd#*(1)4(Year)*",
-		"VersionCode" : "V4"
-	},
-	"FormData":{
-		"Telphone" : "",
-		"DXamount" : "",
-		"BXXJamount" : "",
-		"Title" : "",
-		"Deptleader" : "",
-		"Expenseaccount" : "",
-		"OAnumber" : "",
-		"Standard" : "",
-		"Standardnote" : "",
-		"Extend5" : "",
-		"BillContent" : "",
-		"AdjustAmount" : "",
-		"CurrencyTypeID" : "",
-		"Extend3" : "",
-		"Extend4" : "",
-		"Extend1" : "",
-		"PayerID" : "",
-		"DMBTR" : "",
-		"CommitDate" : "",
-		"SubmitPersonID" : "",
-		"AuditDate" : "",
-		"PersonID" : "于志秋",
-		"Extend2" : "",
-		"PayDate" : "",
-		"ID" : "",
-		"BillCode" : 0,
-		"ExchangeRate" : "",
-		"Amount" : "",
-		"Repayment" : "",
-		"PayStatus" : "",
-		"ProjectID" : "",
-		"RedBorrowings" : "",
-		"DepartmentID" : "财务部门",
-		"AttachmentQuantity" : "",
-		"AuditAmount" : "",
-		"Summary" : "",
-		"CompanyID" : "",
-		"BillInfo_Repayments_V1":[
-			{
-				"BillID" : "",
-				"ID" : "",
-				"OrderNumber" : "",
-				"LoanBillCode" : "",
-				"LoanBillInfoID" : "",
-				"SupjectID" : "",
-				"LoanBillInfoSubjectID" : "",
-				"LoanAmount" : "",
-				"RepaymentTotalAmount" : "",
-				"DebtAmount" : "",
-				"RepaymentAmount" : "",
-				"CreateDateTime" : "",
-				"CommitDate" : "",
-				"LoanDate" : ""
-			}
-		],
-		"PaymentInfo_V1":[
-			{
-				"BillID" : "",
-				"ID" : "",
-				"ReceiverName" : "",
-				"Province" : "",
-				"City" : "",
-				"BankName" : "",
-				"AccountBankName" : "",
-				"BankAccount" : "",
-				"Amount" : "",
-				"OrderIndex" : "",
-				"FinancePayMode" : "",
-				"IdNumber" : "",
-				"Address" : "",
-				"CurrencyTypeID" : "",
-				"ExchangeRate" : "",
-				"DMBTR" : "",
-				"Remark" : "",
-				"AreaCode" : "",
-				"RemittanceUse" : ""
-			}
-		],
-		"MXFL_fymx_V2":[
-			{
-				"Product" : "",
-				"BillID" : "",
-				"ID" : "",
-				"OrderNumber" : "",
-				"SupjectID" : "",
-				"DepartmentID" : "",
-				"Extend1" : "",
-				"Extend2" : "",
-				"Extend3" : "",
-				"Extend4" : "",
-				"Extend5" : "",
-				"Extend6" : "",
-				"Extend7" : "",
-				"Extend8" : "",
-				"Extend9" : "",
-				"Extend10" : "",
-				"Feiyongkemu" : "",
-				"Riqi" : "",
-				"Fyongjine" : "",
-				"Shuoming" : "",
-				"EpenseDepartment" : "",
-				"DepartmentHead" : "",
-				"AdjustmentAmount" : "",
-				"AdjustmentAmountS" : "",
-				"Xuihao" : "",
-				"Accountingsubjects" : "",
-				"Expenseamounty" : "",
-				"Currency" : "",
-				"Exchangerate" : "",
-				"TZHamount" : "",
-				"Customer" : "",
-				"Project" : "",
-				"LIRUN" : ""
-			}
-		]
-	}
-}*/
+				Exchangerate:'1.000',
+				Expenseamounty:'0.00',
+				crfyFormData:{  //直接页面上写可以输入不报错
+					FormTemplate:{
+						ID : "138a026c-f4b7-431c-901d-03107c4cac4b",
+						TemplateCode : "BXDFY",
+						Name : "日常费用报销单",
+						TypeID : "41bdbb1d-5f7f-409a-9ec4-37d870d2cff4",
+						FormNoRule : "$JW$#yyyy##mm##dd#*(1)4(Year)*",
+						VersionCode : "V4"
+					},
+					FormData:{
+						"Telphone" : "",
+						"DXamount" : "",
+						"BXXJamount" : "",
+						"Title" : "",
+						"Deptleader" : "",
+						"Expenseaccount" : "",
+						"OAnumber" : "",
+						"Standard" : "",
+						"Standardnote" : "",
+						"Extend5" : "",
+						"BillContent" : "",
+						"AdjustAmount" : "",
+						"CurrencyTypeID" : "",
+						"Extend3" : "",
+						"Extend4" : "",
+						"Extend1" : "",
+						"PayerID" : "",
+						"DMBTR" : "",
+						"CommitDate" : "",
+						"SubmitPersonID" : "",
+						"AuditDate" : "",
+						"PersonID" : "于志秋",
+						"Extend2" : "",
+						"PayDate" : "",
+						"ID" : "",
+						"BillCode" : 0,
+						"ExchangeRate" : "",
+						"Amount" : "",
+						"Repayment" : "",
+						"PayStatus" : "",
+						"ProjectID" : "",
+						"RedBorrowings" : "",
+						"DepartmentID" : "财务部门",
+						"AttachmentQuantity" : "",
+						"AuditAmount" : "",
+						"Summary" : "",
+						"CompanyID" : "",
+						BillInfo_Repayments_V1:[
+							{
+								"BillID" : "",
+								"ID" : "",
+								"OrderNumber" : "",
+								"LoanBillCode" : "",
+								"LoanBillInfoID" : "",
+								"SupjectID" : "",
+								"LoanBillInfoSubjectID" : "",
+								"LoanAmount" : "",
+								"RepaymentTotalAmount" : "",
+								"DebtAmount" : "",
+								"RepaymentAmount" : "",
+								"CreateDateTime" : "",
+								"CommitDate" : "",
+								"LoanDate" : ""
+							}
+						],
+						PaymentInfo_V1:[
+							{
+								"BillID" : "",
+								"ID" : "",
+								"ReceiverName" : "",
+								"Province" : "",
+								"City" : "",
+								"BankName" : "",
+								"AccountBankName" : "",
+								"BankAccount" : "",
+								"Amount" : "",
+								"OrderIndex" : "",
+								"FinancePayMode" : "",
+								"IdNumber" : "",
+								"Address" : "",
+								"CurrencyTypeID" : "",
+								"ExchangeRate" : "",
+								"DMBTR" : "",
+								"Remark" : "",
+								"AreaCode" : "",
+								"RemittanceUse" : ""
+							}
+						],
+						MXFL_fymx_V2:[
+							{
+								"Product" : "",
+								"BillID" : "",
+								"ID" : "",
+								"OrderNumber" : "",
+								"SupjectID" : "",
+								"DepartmentID" : "",
+								"Extend1" : "",
+								"Extend2" : "",
+								"Extend3" : "",
+								"Extend4" : "",
+								"Extend5" : "",
+								"Extend6" : "",
+								"Extend7" : "",
+								"Extend8" : "",
+								"Extend9" : "",
+								"Extend10" : "",
+								"Feiyongkemu" : "",
+								"Riqi" : "",
+								"Fyongjine" : "",
+								"Shuoming" : "",
+								"EpenseDepartment" : "",
+								"DepartmentHead" : "",
+								"AdjustmentAmount" : "0.00",
+								"AdjustmentAmountS" : "",
+								"Xuihao" : "",
+								"Accountingsubjects" : "",
+								"Expenseamounty" : "",
+								"Currency" : "人民币",
+								"Exchangerate" : "1.000",
+								"TZHamount" : "0.00",
+								"Customer" : "",
+								"Project" : "",
+								"LIRUN" : ""
+							}
+						]
+					}
+				}
 
 			}
 		},
-		computed:{
-			/*--循环的变量--*/
-			crfyFormData() {
+		mounted(){
+			/*--获取动态json数据 --*/    //一旦动态获取数据，再输入值时vuex报错，不能更改？??/
+			/*crfyFormData() {
 				console.log(this.$store.state.table.rcfyList)
                 return this.$store.state.table.rcfyList; 
-            }
+            }*/
+           this.changeAmount();
 		},
 		watch: {
-		　　'this.Exchangerate':'changeAmount',
-			'this.Expenseamounty':'changeAmount',
-			'this.AdjustmentAmount':'changeAmount',
-			'this.TZHamount':'changeAmount'
+		　　'Exchangerate':'changeAmount',
+			'Expenseamounty':'changeAmount'
 		},
 		methods:{
 			changeAmount(){
-				console.log(this.crfyFormData.FormData.MXFL_fymx_V2)
+				var patt = new RegExp(/\.\d{5,}/);
+				/*this.AdjustmentAmount = this.TZHamount =
+				(parseFloat(this.Exchangerate) *parseFloat(this.Expenseamounty) * 1000) / 1000;
+				console.log(this.AdjustmentAmount)*/
 				if(this.crfyFormData.FormData.MXFL_fymx_V2.length>0){
-					for(var i=0; i<this.crfyFormData.FormData.MXFL_fymx_V2.length-1;i++){
-						this.Exchangerate = this.crfyFormData.FormData.MXFL_fymx_V2[i].Exchangerate;
-						this.Expenseamounty = this.crfyFormData.FormData.MXFL_fymx_V2[i].Expenseamounty;
-						this.AdjustmentAmount = this.crfyFormData.FormData.MXFL_fymx_V2[i].AdjustmentAmount;
-						this.TZHamount = this.crfyFormData.FormData.MXFL_fymx_V2[i].TZHamount;
+					for(var i=0; i< this.crfyFormData.FormData.MXFL_fymx_V2.length;i++){
+						this.crfyFormData.FormData.MXFL_fymx_V2[i].Exchangerate = this.Exchangerate;
+						this.crfyFormData.FormData.MXFL_fymx_V2[i].Expenseamounty = this.Expenseamounty;
+						this.crfyFormData.FormData.MXFL_fymx_V2[i].AdjustmentAmount = ((parseFloat(this.Exchangerate) *parseFloat(this.Expenseamounty) * 1000) / 1000).toFixed(2);
+						this.crfyFormData.FormData.MXFL_fymx_V2[i].TZHamount = ((parseFloat(this.Exchangerate) *parseFloat(this.Expenseamounty) * 1000) / 1000).toFixed(2);
+						console.log(this.crfyFormData.FormData.MXFL_fymx_V2[i].TZHamount)
 					}
 				}
-				var patt = new RegExp(/\.\d{5,}/);
-				this.AdjustmentAmount = this.TZHamount =
-				(parseFloat(this.Exchangerate) * 1000 *parseFloat(this.Expenseamounty) * 1000) / 1000;
 			},
 			getHttp(){
 				let _self= this;
-				/*param.loading = true;*/
 				let url = common.apiUrl.rcfyList;
 				httpService.myTable(url,function(suc){
 					console.log(suc.body)
@@ -545,8 +542,7 @@
 			}*/
 		},
 		created(){
-			this.getHttp();
-			console.log(this.crfyFormData)
+			/*this.getHttp();*/
 			setTimeout(() => {
 	          	this.loading2 = false;
 	        }, 1000);
