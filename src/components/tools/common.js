@@ -5,7 +5,8 @@ let common = new Vue({
 	data:{
 		commonurl:'',
 		apiUrl:{
-			list:'/static/data/table.json'
+			list:'/static/data/table.json',
+			rcfyList:'/static/data/rcfyTable.json'
 		}
 	},
 	methods:{

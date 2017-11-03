@@ -13,7 +13,6 @@
 			    }
 			    .el-col {
 				    border-right: 1px solid #0082E6;
-				    margin-bottom: 10px;
 				    &:last-child {
 				      border-right: 0;
 				    }
@@ -37,15 +36,16 @@
 			.form-content{
 				margin: 10px 0;
 				.el-row{
-					background: #fafafa;
+					background-color: #fafafa;
 					.el-col{
 						border:none;
+						margin-bottom:10px;
 						.el-form-item /deep/ .el-form-item__content{
 							font-size: 13px;
 						}
 						.el-form-item /deep/ .el-form-item__label{
 							padding-right: 0px;
-							white-space: nowrap;
+							/*white-space: nowrap;*/
 							font-size: 13px;
 						}
 						.el-form-item /deep/ .el-input{
@@ -77,6 +77,7 @@
 				}
 			}
 			.sub-forms{
+				clear:both;
 				.sub-forms-title{
 					height:30px;
 					text-indent: 10px;
@@ -86,6 +87,22 @@
 					background: #e0ecff;
 					border-top:1px solid #007CDB;
 					border-bottom:1px solid #007CDB;
+				}
+				.form-content{
+					background-color: rgb(236, 236, 236);
+					padding: 10px;
+					.el-row{
+						background-color: rgb(236, 236, 236);
+					}
+					.el-icon-setStyle{
+						font-size:10px;
+						color:#666;
+						float: right;
+					}
+				}
+				.addBtn{
+					float: right;
+					margin-right:10px;
 				}
 			}
 		}
@@ -100,23 +117,22 @@
 		<buttonTop></buttonTop>
 		<div class="form-input">
 			<div class="mainTable">
-				<el-form  ref="FormData" :model="FormData" label-width="80px" size="mini" v-cloak v-loading="loading2" element-loading-text="拼命加载中"  element-loading-spinner="el-icon-loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+				<el-form  ref="crfyFormData" :model="crfyFormData" label-width="80px" size="mini" v-cloak v-loading="loading2" element-loading-text="拼命加载中"  element-loading-spinner="el-icon-loading" element-loading-background="rgba(0, 0, 0, 0.8)">
 					<el-row>
 					  <el-col :span="8"><div class="grid-content bg-purple">深圳珈伟光伏照明股份有限公司{{FormTemplate.VersionCode}}</div></el-col>
 					  <el-col :span="8"><div class="grid-content bg-purple">{{FormTemplate.Name}}</div></el-col>
 					  <el-col :span="8"><div class="grid-content bg-purple"><img src="" alt="条形码" /></div></el-col>
 					</el-row>
+					<!--start 直接取值-->
 					<div class="form-content">
 						<el-row>
-							<el-col v-for="(item,index) in FormData" :xs="item.SpaceRow" :sm="item.SpaceRow" :md="item.SpaceRow" :lg="item.SpaceRow" >
-							  	<el-form-item :label="item.attrName+'：'" prop="val">
-							  		<!--<span v-if="item.type==='input'&&item.isEdit==false">{{item.val}}</span>-->
-								    <el-input v-model="item.val" v-bind:readonly="item.isEdit" v-if="item.type==='input'&&item.isEdit==false" v-bind:class="{'el-input__hidden':!item.isEdit}"></el-input>
-								    <!--<el-input v-model="item.val" v-bind:disabled="item.disabledInput" v-if="item.type==='input'&&item.disabledInput==true" v-bind:class="{'el-input__hidden':item.disabledInput}"></el-input>-->
-								    <el-input v-model="item.val" v-if="item.type==='input'&&item.isEdit==true" required="true"></el-input>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+							  	<el-form-item label="申请人：" prop="PersonID">
+								    <el-input v-model="crfyFormData.FormData.PersonID" :readonly="true"></el-input>
+								   <!-- <el-input v-model="item.val" v-if="item.type==='input'&&item.isEdit==true" required="true"></el-input>
 								    <el-select v-model="item.val"  placeholder="请选择"  v-if="item.type==='select'&&item.isEdit===true" @change="selectChange" required="true">
 									    <el-option
-									      v-for="departPerson in item.departments"
+									      v-for="departPerson in item.select"
 									      :key="departPerson.value"
 									      :label="departPerson.label"
 									      :value="departPerson.value">
@@ -126,52 +142,120 @@
 									<el-date-picker v-model="item.val" type="date" placeholder="选择日期" v-if="item.type==='date'&&item.isEdit===true"></el-date-picker>
 									<el-input v-model="item.val"  v-if="item.type==='date'&&item.isEdit==false" v-bind:class="{'el-input__hidden':!item.isEdit}"></el-input>
 									<el-input type="textarea" v-model="item.val" v-if="item.type==='textarea'&&item.isEdit==true" ></el-input>
-									<el-input type="textarea" v-model="item.val" v-if="item.type==='textarea'&&item.isEdit==false" ></el-input>
+									<el-input type="textarea" v-model="item.val" v-if="item.type==='textarea'&&item.isEdit==false" ></el-input>-->
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+								<el-form-item label="联系方式：" prop="Telphone">
+								    <el-input v-model="crfyFormData.FormData.Telphone"></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+								<el-form-item label="单据编号：" prop="BillCode">
+								    <el-input v-model="crfyFormData.FormData.BillCode" :readonly="true"></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+								<el-form-item label="申请部门：" prop="DepartmentID">
+								    <el-select v-model="crfyFormData.FormData.DepartmentID" :readonly="true"></el-select>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+								<el-form-item label="附件张数：" prop="AttachmentQuantity">
+								    <el-input v-model="crfyFormData.FormData.AttachmentQuantity"></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+								<el-form-item label="单据日期：" prop="AuditDate">
+								    <el-date-picker  type="date" v-model="crfyFormData.FormData.AuditDate"></el-date-picker>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="24" :sm="24" :md="24" :lg="24" >
+								<el-form-item label="OA申请编号：" prop="OAnumber">
+								    <el-input  v-model="crfyFormData.FormData.OAnumber"></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col  :xs="24" :sm="24" :md="24" :lg="24" >
+								<el-form-item label="单据摘要：" prop="Summary">
+								    <el-input  type="textarea" v-model="crfyFormData.FormData.Summary"></el-input>
 								</el-form-item>
 							</el-col>
 						</el-row>
-						<div class="sub-forms">
+						<div class="sub-forms" >
 							<div class="sub-forms-title">报销明细</div>
-							<div class="form-content">
-									<el-row>
-										<el-col :xs="8" :sm="8" :md="8" :lg="8">
-										  	<el-form-item label="申请人：" prop="name">
-											    <el-input v-model="FormData.name"></el-input>
-											</el-form-item>
-										</el-col>
-										<el-col :xs="8" :sm="8" :md="8" :lg="8">
-											<el-form-item label="联系电话：" prop="tel">
-											    <el-input v-model="FormData.tel"></el-input>
-											</el-form-item>
-										</el-col>
-									  	<el-col :xs="8" :sm="8" :md="8" :lg="8">
-											<el-form-item label="单据编号：" prop="contactNo">
-											    <el-input v-model="FormData.contactNo"></el-input>
-											</el-form-item>
-										</el-col>
-									</el-row>
-									<el-row>
-									<el-col :xs="8" :sm="8" :md="8" :lg="8">
-									  	<el-form-item label="申请部门：" prop="department" >
-										    <el-input v-model="FormData.department"></el-input>
+							<div class="form-content widget" v-if="crfyFormData.FormData.MXFL_fymx_V2&&crfyFormData.FormData.MXFL_fymx_V2.length > 0" v-for="(item,index) in crfyFormData.FormData.MXFL_fymx_V2">
+								<p><b>{{index+1}}</b><span class="el-icon-setStyle" @click="deleteBXMX(index)"><i class="el-icon-close"></i></span></p>
+								<el-row>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="费用科目：" prop="Feiyongkemu">
+										    <el-input v-model="item.Feiyongkemu" :readonly="true">
+										    	<el-button slot="append" icon="search" ></el-button>
+										    </el-input>
 										</el-form-item>
 									</el-col>
-									<el-col :xs="8" :sm="8" :md="8" :lg="8">
-										<el-form-item label="附件张数：" prop="attachments">
-										    <el-input v-model="FormData.attachments"></el-input>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="受益部门：" prop="EpenseDepartment">
+										    <el-input v-model="item.EpenseDepartment" :readonly="true">
+										    	<el-button slot="append" icon="search" ></el-button>
+										    </el-input>
 										</el-form-item>
 									</el-col>
-								  	<el-col :xs="8" :sm="8" :md="8" :lg="8">
-										<el-form-item label="单据日期：" prop="dateTime">
-										    <el-date-picker v-model="FormData.dateTime" type="date" placeholder="选择日期" ></el-date-picker>
+									
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="利润中心：" prop="LIRUN">
+										    <el-input v-model="item.LIRUN" :readonly="true">
+										    	<el-button slot="append" icon="search" ></el-button>
+										    </el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="受益客户：" prop="Customer">
+										    <el-input v-model="item.Customer" :readonly="true">
+										    	<el-button slot="append" icon="search" ></el-button>
+										    </el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="部门负责人：" prop="DepartmentHead">
+										    <el-input v-model="item.DepartmentHead" :readonly="true"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="币种：" prop="Currency">
+										    <el-input v-model="item.Currency" :readonly="true">
+										    	<el-button slot="append" icon="search" ></el-button>
+										    </el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="费用金额（原）：" prop="Expenseamounty">
+										    <el-input v-model="item.Expenseamounty" ></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="汇率：" prop="Exchangerate">
+										    <el-input v-model="item.Exchangerate"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="费用金额（本）：" prop="AdjustmentAmount">
+										    <el-input v-model="item.AdjustmentAmount" :readonly="true"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col  :xs="8" :sm="8" :md="8" :lg="8" >
+										<el-form-item label="调整后金额：" prop="TZHamount">
+										    <el-input v-model="item.TZHamount" :readonly="true"></el-input>
 										</el-form-item>
 									</el-col>
 								</el-row>
-								</div>
+							</div>
+							<el-form-item>
+								<el-button type="primary" @click="addBXMX()" class="addBtn" size="small">添加</el-button>
+							</el-form-item>
 						</div>
 						<el-form-item>
-							<el-button type="primary" @click="submitForm('FormData')">立即创建</el-button>
-				   			<el-button @click="resetForm('FormData')">重置</el-button>
+							<el-button type="primary" @click="submitForm()">立即创建</el-button>
+				   			<el-button @click="resetForm()">重置</el-button>
 			   			</el-form-item>
 					</div>
 				</el-form>
@@ -184,6 +268,7 @@
 	import httpService from '../components/tools/httpService.js'
 	import common from  '../components/tools/common.js'
 	import buttonTop from '../components/common/buttonTop.vue'
+	import { mapGetters } from 'vuex'
 	export default{
 		components:{
 			buttonTop
@@ -199,87 +284,244 @@
 					FormNoRule : "$JW$#yyyy##mm##dd#*(1)4(Year)*",
 					VersionCode : "V4"
 				},
-				FormData:[{
-					id:1,
-					attrName:'申请人',
-					type:'input',
-					isEdit:false,
-					disabledInput:false,
-					val:'于志秋',
-					SpaceRow:8
-				},{
-					id:2,
-					attrName:'联系电话',
-					type:'input',
-					isEdit:true,
-					disabledInput:false,
-					val:'',
-					SpaceRow:8
-				},
-				{
-					id:3,
-					attrName:'单据编号',
-					type:'input',
-					isEdit:false,
-					disabledInput:false,
-					val:0,
-					SpaceRow:8
-				},
-				{
-					id:4,
-					attrName:'申请部门',
-					type:'select',
-					isEdit:true,
-					disabledInput:false,
-					val:'',
-					SpaceRow:8,
-					departments:[{
-						id:41,
-						value:'财务部门',
-						label:''
-					},
-					{
-						id:41,
-						value:'技术部门',
-						label:''
-					}]
-				},
-				{
-					id:5,
-					attrName:'附件张数',
-					type:'input',
-					isEdit:true,
-					disabledInput:false,
-					val:0,
-					SpaceRow:8
-				},{
-					id:6,
-					attrName:'单据日期',
-					type:'date',
-					isEdit:true,
-					disabledInput:false,
-					val:'',
-					SpaceRow:8
-				},
-				{
-					id:7,
-					attrName:'摘要',
-					type:'textarea',
-					isEdit:true,
-					disabledInput:false,
-					val:'',
-					SpaceRow:24
-				}]
+				Exchangerate:'',
+				Expenseamounty:'',
+				AdjustmentAmount:'',
+				TZHamount:''
+/*				crfyFormData:{
+	"FormTemplate":{
+		"ID" : "138a026c-f4b7-431c-901d-03107c4cac4b",
+		"TemplateCode" : "BXDFY",
+		"Name" : "日常费用报销单",
+		"TypeID" : "41bdbb1d-5f7f-409a-9ec4-37d870d2cff4",
+		"FormNoRule" : "$JW$#yyyy##mm##dd#*(1)4(Year)*",
+		"VersionCode" : "V4"
+	},
+	"FormData":{
+		"Telphone" : "",
+		"DXamount" : "",
+		"BXXJamount" : "",
+		"Title" : "",
+		"Deptleader" : "",
+		"Expenseaccount" : "",
+		"OAnumber" : "",
+		"Standard" : "",
+		"Standardnote" : "",
+		"Extend5" : "",
+		"BillContent" : "",
+		"AdjustAmount" : "",
+		"CurrencyTypeID" : "",
+		"Extend3" : "",
+		"Extend4" : "",
+		"Extend1" : "",
+		"PayerID" : "",
+		"DMBTR" : "",
+		"CommitDate" : "",
+		"SubmitPersonID" : "",
+		"AuditDate" : "",
+		"PersonID" : "于志秋",
+		"Extend2" : "",
+		"PayDate" : "",
+		"ID" : "",
+		"BillCode" : 0,
+		"ExchangeRate" : "",
+		"Amount" : "",
+		"Repayment" : "",
+		"PayStatus" : "",
+		"ProjectID" : "",
+		"RedBorrowings" : "",
+		"DepartmentID" : "财务部门",
+		"AttachmentQuantity" : "",
+		"AuditAmount" : "",
+		"Summary" : "",
+		"CompanyID" : "",
+		"BillInfo_Repayments_V1":[
+			{
+				"BillID" : "",
+				"ID" : "",
+				"OrderNumber" : "",
+				"LoanBillCode" : "",
+				"LoanBillInfoID" : "",
+				"SupjectID" : "",
+				"LoanBillInfoSubjectID" : "",
+				"LoanAmount" : "",
+				"RepaymentTotalAmount" : "",
+				"DebtAmount" : "",
+				"RepaymentAmount" : "",
+				"CreateDateTime" : "",
+				"CommitDate" : "",
+				"LoanDate" : ""
+			}
+		],
+		"PaymentInfo_V1":[
+			{
+				"BillID" : "",
+				"ID" : "",
+				"ReceiverName" : "",
+				"Province" : "",
+				"City" : "",
+				"BankName" : "",
+				"AccountBankName" : "",
+				"BankAccount" : "",
+				"Amount" : "",
+				"OrderIndex" : "",
+				"FinancePayMode" : "",
+				"IdNumber" : "",
+				"Address" : "",
+				"CurrencyTypeID" : "",
+				"ExchangeRate" : "",
+				"DMBTR" : "",
+				"Remark" : "",
+				"AreaCode" : "",
+				"RemittanceUse" : ""
+			}
+		],
+		"MXFL_fymx_V2":[
+			{
+				"Product" : "",
+				"BillID" : "",
+				"ID" : "",
+				"OrderNumber" : "",
+				"SupjectID" : "",
+				"DepartmentID" : "",
+				"Extend1" : "",
+				"Extend2" : "",
+				"Extend3" : "",
+				"Extend4" : "",
+				"Extend5" : "",
+				"Extend6" : "",
+				"Extend7" : "",
+				"Extend8" : "",
+				"Extend9" : "",
+				"Extend10" : "",
+				"Feiyongkemu" : "",
+				"Riqi" : "",
+				"Fyongjine" : "",
+				"Shuoming" : "",
+				"EpenseDepartment" : "",
+				"DepartmentHead" : "",
+				"AdjustmentAmount" : "",
+				"AdjustmentAmountS" : "",
+				"Xuihao" : "",
+				"Accountingsubjects" : "",
+				"Expenseamounty" : "",
+				"Currency" : "",
+				"Exchangerate" : "",
+				"TZHamount" : "",
+				"Customer" : "",
+				"Project" : "",
+				"LIRUN" : ""
+			}
+		]
+	}
+}*/
+
 			}
 		},
+		computed:{
+			/*--循环的变量--*/
+			crfyFormData() {
+				console.log(this.$store.state.table.rcfyList)
+                return this.$store.state.table.rcfyList; 
+            }
+		},
+		watch: {
+		　　'this.Exchangerate':'changeAmount',
+			'this.Expenseamounty':'changeAmount',
+			'this.AdjustmentAmount':'changeAmount',
+			'this.TZHamount':'changeAmount'
+		},
 		methods:{
-			selectChange(val){
+			changeAmount(){
+				console.log(this.crfyFormData.FormData.MXFL_fymx_V2)
+				if(this.crfyFormData.FormData.MXFL_fymx_V2.length>0){
+					for(var i=0; i<this.crfyFormData.FormData.MXFL_fymx_V2.length-1;i++){
+						this.Exchangerate = this.crfyFormData.FormData.MXFL_fymx_V2[i].Exchangerate;
+						this.Expenseamounty = this.crfyFormData.FormData.MXFL_fymx_V2[i].Expenseamounty;
+						this.AdjustmentAmount = this.crfyFormData.FormData.MXFL_fymx_V2[i].AdjustmentAmount;
+						this.TZHamount = this.crfyFormData.FormData.MXFL_fymx_V2[i].TZHamount;
+					}
+				}
+				var patt = new RegExp(/\.\d{5,}/);
+				this.AdjustmentAmount = this.TZHamount =
+				(parseFloat(this.Exchangerate) * 1000 *parseFloat(this.Expenseamounty) * 1000) / 1000;
+			},
+			getHttp(){
+				let _self= this;
+				/*param.loading = true;*/
+				let url = common.apiUrl.rcfyList;
+				httpService.myTable(url,function(suc){
+					console.log(suc.body)
+					if(suc.status==200){
+						_self.$message('获取数据成功');
+						/*setTimeout(() => {
+				          	param.loading = false;
+				        }, 3000);*/
+					}
+					_self.$store.dispatch('getRcfyList', suc.body);
+				},function(err){
+					_self.$message({
+                    	showClose:true,
+                    	message:'服务器内部错误，请重试'
+                    });
+				})
+			},
+			deleteBXMX(index){
+				console.log(index)
+				this.crfyFormData.FormData.MXFL_fymx_V2.splice(index,1);
+			},
+			addBXMX(){
+				const items = [];
+				this.crfyFormData.FormData.MXFL_fymx_V2.forEach(function(item) {
+					var temp = {
+	                    Product : item.Product,
+						BillID : item.BillID,
+						ID : item.ID,
+						OrderNumber : item.OrderNumber,
+						SupjectID : item.SupjectID,
+						DepartmentID: item.DepartmentID,
+						Extend1 : item.Extend1,
+						Extend2 : item.Extend2,
+						Extend3 : item.Extend3,
+						Extend4 : item.Extend4,
+						Extend5 : item.Extend5,
+						Extend6 : item.Extend6,
+						Extend7 : item.Extend7,
+						Extend8 : item.Extend8,
+						Extend9 : item.Extend9,
+						Extend10 : item.Extend10,
+						Feiyongkemu :item.Feiyongkemu ,
+						Riqi : item.Riqi,
+						Fyongjine : item.Fyongjine,
+						Shuoming : item.Shuoming,
+						EpenseDepartment : item.EpenseDepartment,
+						DepartmentHead : item.DepartmentHead,
+						AdjustmentAmount :item.AdjustmentAmount ,
+						AdjustmentAmountS :item.AdjustmentAmountS ,
+						Xuihao : item.Xuihao,
+						Accountingsubjects : item.Accountingsubjects,
+						Expenseamounty : item.Expenseamounty,
+						Currency : item.Currency,
+						Exchangerate :item.Exchangerate,
+						TZHamount : item.TZHamount,
+						Customer : item.Customer,
+						Project :item.Project,
+						LIRUN : item.LIRUN
+	              };
+	               items.push(temp);
+				});
+				this.crfyFormData.FormData.MXFL_fymx_V2.push(items);
+				console.log(this.crfyFormData.FormData.MXFL_fymx_V2);
+			},
+			/*selectChange(val){
 				console.log(val);
 			},
 			submitForm(FormData) {
 		        this.$refs[FormData].validate((valid) => {
 			        if (valid) {
 						//提交时转换时间的值
+						console.log(this.FormData)
+						console.log(this.FormSub)
 						/*this.FormData.loading = true;*/
 			          	/*var d = new Date(this.FormData.date1);
 				        var date = d.getDate();
@@ -291,19 +533,20 @@
 					        date = '0' + date;
 					    }
 					    this.ruleForm.date1=d.getFullYear() + '-' + month + '-' + date;  
-				        console.log(this.ruleForm.date1)*/
+				        console.log(this.ruleForm.date1)
 			            setTimeout(() => {
 			            	alert('submit!');
-				          /*this.FormData.loading = false;*/
 				        }, 50);
 			        } else {
 			            console.log('error submit!!');
 			            return false;
 		          	}
 			    })
-			}
+			}*/
 		},
 		created(){
+			this.getHttp();
+			console.log(this.crfyFormData)
 			setTimeout(() => {
 	          	this.loading2 = false;
 	        }, 1000);

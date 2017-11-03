@@ -17,6 +17,8 @@
 		top:60px;
 		left: 180px;
 		right:0;
+		z-index: 100;
+    	background-color: #fff;
 		.btn-text {
 			color:#20a0ff;
 			line-height: 35px;

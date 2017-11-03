@@ -125,7 +125,7 @@
 
 <script>
 	import common from '../components/tools/common.js'
-	import moment from '../../static/moment.js'
+	/*import moment from '../../static/moment.js'*/
 	import tableDialog from '../components/modelDialog.vue'
 	export default{
 		components:{

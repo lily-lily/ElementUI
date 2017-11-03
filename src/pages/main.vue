@@ -172,6 +172,7 @@
 				param.loading = true;
 				let url = common.apiUrl.list;
 				httpService.myTable(url,function(suc){
+					console.log(suc.body)
 					if(suc.status==200){
 						_self.$message('获取数据成功');
 						setTimeout(() => {
